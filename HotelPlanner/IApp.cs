@@ -1,4 +1,4 @@
-﻿namespace HotelPlanner
+﻿namespace ConsoleUI
 {
     public interface IApp
     {

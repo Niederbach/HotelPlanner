@@ -1,11 +1,11 @@
-﻿using HotelPlanner.Displays;
+﻿using ConsoleUI.Displays;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelPlanner;
+namespace ConsoleUI;
 
 public class App : IApp
 {

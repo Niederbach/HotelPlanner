@@ -1,12 +1,12 @@
 ﻿using Autofac;
-using HotelPlanner.Displays;
+using ConsoleUI.Displays;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelPlanner.AutoFac;
+namespace ConsoleUI.AutoFac;
 
 public static class ContainerConfig
 {

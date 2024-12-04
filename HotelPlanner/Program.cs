@@ -1,7 +1,7 @@
 ﻿using Autofac;
-using HotelPlanner.AutoFac;
+using ConsoleUI.AutoFac;
 
-namespace HotelPlanner
+namespace ConsoleUI
 {
     internal class Program
     {

@@ -1,8 +1,7 @@
-﻿namespace HotelPlanner.Displays
+﻿namespace ConsoleUI.Displays;
+
+public interface IMenu
 {
-    public interface IMenu
-    {
-        void ShowMenu();
-        void UserInput();
-    }
+    void ShowMenu();
+    void UserInput(ConsoleKeyInfo keyInput);
 }
