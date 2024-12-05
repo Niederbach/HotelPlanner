@@ -15,9 +15,4 @@
     <ProjectReference Include="..\HotelManagementLibrary\HotelManagementLibrary.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Displays\DisplayCustomers\" />
-    <Folder Include="Displays\DisplayRoomManagement\" />
-  </ItemGroup>
-
 </Project>

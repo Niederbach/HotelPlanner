@@ -1,5 +1,9 @@
 ﻿using Autofac;
 using ConsoleUI.Displays;
+using ConsoleUI.Displays.DisplayBooking;
+using ConsoleUI.Displays.DisplayCustomers;
+using ConsoleUI.Displays.DisplayRoomManagement;
+using HotelManagementLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +20,9 @@ public static class ContainerConfig
 
         builder.RegisterType<App>().As<IApp>();
         builder.RegisterType<MainMenu>().As<IMenu>();
+        builder.RegisterType<BookingMenu>().As<IBookingMenu>();
+        builder.RegisterType<CustomerMenu>().As<ICustomerMenu>();
+        builder.RegisterType<RoomMenu>().As<IRoomMenu>();
       
         return builder.Build();
     }

@@ -1,4 +1,8 @@
-﻿using System;
+﻿using ConsoleUI.Displays.DisplayBooking;
+using ConsoleUI.Displays.DisplayCustomers;
+using ConsoleUI.Displays.DisplayRoomManagement;
+using ConsoleUI.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +12,20 @@ namespace ConsoleUI.Displays;
 
 public class MainMenu : IMenu
 {
+    IBookingMenu _booking;
+    ICustomerMenu _customer;
+    IRoomMenu _room;
     private int _selectedIndex = 0;
     private bool _running = true;
     private List<string> _mainMenuOptions = new List<string>();
-    public MainMenu()
+    public MainMenu(IBookingMenu booking, ICustomerMenu customer, IRoomMenu room)
     {
         _mainMenuOptions.Add("Kunder");
         _mainMenuOptions.Add("Bokningar");
         _mainMenuOptions.Add("Hantera rum");
+        _booking = booking;
+        _customer = customer;
+        _room = room;
     }
     public void ShowMenu()
     {
@@ -25,23 +35,8 @@ public class MainMenu : IMenu
             Console.WriteLine("The Shabby Chateau");
             Console.WriteLine("==================");
 
-            for (int i = 0; i < _mainMenuOptions.Count; i++)
-            {
-                if (_selectedIndex == i)
-                {
-                    Console.BackgroundColor = ConsoleColor.Green;
-                    Console.ForegroundColor = ConsoleColor.Black;
-                }
-                Console.WriteLine($"- {_mainMenuOptions[i]}");
-                Console.ResetColor();
-            }
-            if (_selectedIndex == _mainMenuOptions.Count)
-            {
-                Console.BackgroundColor = ConsoleColor.Red;
-                Console.ForegroundColor = ConsoleColor.Black;
-            }
-            Console.WriteLine("- Avsluta");
-            Console.ResetColor();
+            MenuFormat.CreateMenuUI(_mainMenuOptions, _selectedIndex);
+
             Console.WriteLine("==================");
 
 
@@ -63,6 +58,24 @@ public class MainMenu : IMenu
             _selectedIndex--;
             if (_selectedIndex < 0)
                 _selectedIndex = _mainMenuOptions.Count;
+        }
+        else if (keyInput.Key == ConsoleKey.Enter)
+        {
+            if (_selectedIndex == 0)
+            {
+                _customer.ShowCustomerMenu();
+            }
+            else if (_selectedIndex == 1)
+            {
+                _booking.ShowBookingMenu();
+            }
+            else if (_selectedIndex == 2)
+            {
+                _room.ShowRoomManagementMenu();
+            }
+            else if (_selectedIndex == _mainMenuOptions.Count)
+                _running = false;
+
         }
     }
 }
