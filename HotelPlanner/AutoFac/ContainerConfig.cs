@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using ConsoleUI.Displays;
 using ConsoleUI.Displays.DisplayBooking;
+using ConsoleUI.Displays.DisplayBooking.BookingInterfaces;
 using ConsoleUI.Displays.DisplayCustomers;
 using ConsoleUI.Displays.DisplayRoomManagement;
 using HotelManagementLibrary.Models;
@@ -23,6 +24,7 @@ public static class ContainerConfig
         builder.RegisterType<BookingMenu>().As<IBookingMenu>();
         builder.RegisterType<CustomerMenu>().As<ICustomerMenu>();
         builder.RegisterType<RoomMenu>().As<IRoomMenu>();
+        builder.RegisterType<DisplayCreateBooking>().As<IDisplayCreateBooking>();
       
         return builder.Build();
     }

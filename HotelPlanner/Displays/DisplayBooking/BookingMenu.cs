@@ -1,24 +1,21 @@
-﻿using ConsoleUI.Tools;
-using HotelManagementLibrary.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ConsoleUI.Displays.DisplayBooking.BookingInterfaces;
+using ConsoleUI.Tools;
 
 namespace ConsoleUI.Displays.DisplayBooking;
 
 public class BookingMenu : IBookingMenu
 {
+    IDisplayCreateBooking _createBooking;
     private bool _running;
     private int _selectedIndex = 0;
     private List<string> _bookingOptions = new List<string>();
-    public BookingMenu()
+    public BookingMenu(IDisplayCreateBooking createBooking)
     {
-        _bookingOptions.Add("Lägg till booking");
+        _bookingOptions.Add("Lägg till boking");
         _bookingOptions.Add("Titta på bokingar");
         _bookingOptions.Add("Ändra på bokning");
         _bookingOptions.Add("Ta bort bokning");
+        _createBooking = createBooking;
     }
 
     public void ShowBookingMenu()
@@ -38,7 +35,7 @@ public class BookingMenu : IBookingMenu
             var keyInput = Console.ReadKey(true);
             UserInput(keyInput);
         }
-        
+
     }
     public void UserInput(ConsoleKeyInfo keyInput)
     {
@@ -58,7 +55,7 @@ public class BookingMenu : IBookingMenu
         {
             if (_selectedIndex == 0)
             {
-
+                _createBooking.CreateBooking();
             }
             else if (_selectedIndex == 1)
             {

@@ -1,5 +1,4 @@
-﻿
-namespace ConsoleUI.Displays.DisplayBooking
+﻿namespace ConsoleUI.Displays.DisplayBooking.BookingInterfaces
 {
     public interface IBookingMenu
     {

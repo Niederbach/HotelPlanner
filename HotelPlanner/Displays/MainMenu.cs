@@ -1,4 +1,4 @@
-﻿using ConsoleUI.Displays.DisplayBooking;
+﻿using ConsoleUI.Displays.DisplayBooking.BookingInterfaces;
 using ConsoleUI.Displays.DisplayCustomers;
 using ConsoleUI.Displays.DisplayRoomManagement;
 using ConsoleUI.Tools;
