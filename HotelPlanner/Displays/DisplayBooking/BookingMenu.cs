@@ -5,11 +5,11 @@ namespace ConsoleUI.Displays.DisplayBooking;
 
 public class BookingMenu : IBookingMenu
 {
-    IDisplayCreateBooking _createBooking;
+    ICreateBooking _createBooking;
     private bool _running;
     private int _selectedIndex = 0;
     private List<string> _bookingOptions = new List<string>();
-    public BookingMenu(IDisplayCreateBooking createBooking)
+    public BookingMenu(ICreateBooking createBooking)
     {
         _bookingOptions.Add("Lägg till boking");
         _bookingOptions.Add("Titta på bokingar");

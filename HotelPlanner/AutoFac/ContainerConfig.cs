@@ -24,7 +24,7 @@ public static class ContainerConfig
         builder.RegisterType<BookingMenu>().As<IBookingMenu>();
         builder.RegisterType<CustomerMenu>().As<ICustomerMenu>();
         builder.RegisterType<RoomMenu>().As<IRoomMenu>();
-        builder.RegisterType<DisplayCreateBooking>().As<IDisplayCreateBooking>();
+        builder.RegisterType<CreateBooking>().As<IDisplayCreateBooking>();
       
         return builder.Build();
     }
