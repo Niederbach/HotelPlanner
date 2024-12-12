@@ -1,8 +1,7 @@
 ﻿namespace ConsoleUI.Displays.DisplayBooking.BookingInterfaces
 {
-    public interface ICreateBooking
+    public interface IUpdateBooking
     {
-        void ShowCreateBooking();
-        
+        void ShowUpdateBooking();
     }
 }

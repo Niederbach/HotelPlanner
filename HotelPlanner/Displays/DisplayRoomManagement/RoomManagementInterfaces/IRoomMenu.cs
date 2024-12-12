@@ -1,5 +1,4 @@
-﻿
-namespace ConsoleUI.Displays.DisplayRoomManagement
+﻿namespace ConsoleUI.Displays.DisplayRoomManagement.RoomManagementInterfaces
 {
     public interface IRoomMenu
     {

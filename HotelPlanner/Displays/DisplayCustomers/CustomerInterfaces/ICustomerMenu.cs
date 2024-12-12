@@ -1,5 +1,4 @@
-﻿
-namespace ConsoleUI.Displays.DisplayCustomers
+﻿namespace ConsoleUI.Displays.DisplayCustomers.CustomerInterfaces
 {
     public interface ICustomerMenu
     {

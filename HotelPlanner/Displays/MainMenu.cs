@@ -1,6 +1,6 @@
 ﻿using ConsoleUI.Displays.DisplayBooking.BookingInterfaces;
-using ConsoleUI.Displays.DisplayCustomers;
-using ConsoleUI.Displays.DisplayRoomManagement;
+using ConsoleUI.Displays.DisplayCustomers.CustomerInterfaces;
+using ConsoleUI.Displays.DisplayRoomManagement.RoomManagementInterfaces;
 using ConsoleUI.Tools;
 using System;
 using System.Collections.Generic;
