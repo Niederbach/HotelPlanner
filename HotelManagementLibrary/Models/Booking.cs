@@ -13,9 +13,8 @@ namespace HotelManagementLibrary.Models
         public DateTime ArrivalDate { get; set; }
         public DateTime DepartureDate { get; set; }
         public decimal Price { get; set; }
-        public ICollection<Invoice> Invoice { get; set; }
+        public int InvoiceId { get; set; }
+        public Invoice Invoice { get; set; }
         public ICollection<Room> Room { get; set; }
-        
-         
     }
 }

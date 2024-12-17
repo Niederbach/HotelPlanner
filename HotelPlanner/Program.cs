@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using ConsoleUI.AutoFac;
+using ConsoleUI.RootInterfaces;
 
 namespace ConsoleUI
 {

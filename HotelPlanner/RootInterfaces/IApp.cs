@@ -1,4 +1,4 @@
-﻿namespace ConsoleUI
+﻿namespace ConsoleUI.RootInterfaces
 {
     public interface IApp
     {

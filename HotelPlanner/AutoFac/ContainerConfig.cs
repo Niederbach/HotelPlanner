@@ -8,6 +8,9 @@ using ConsoleUI.Displays.DisplayInvoice;
 using ConsoleUI.Displays.DisplayInvoice.InvoiceInterfaces;
 using ConsoleUI.Displays.DisplayRoomManagement;
 using ConsoleUI.Displays.DisplayRoomManagement.RoomManagementInterfaces;
+using ConsoleUI.RootInterfaces;
+using HotelManagementLibrary.Data;
+using HotelManagementLibrary.Data.DataInterfaces;
 using HotelManagementLibrary.Services;
 using HotelManagementLibrary.Services.ServiceInterfaces;
 
@@ -19,8 +22,12 @@ public static class ContainerConfig
     {
         var builder = new ContainerBuilder();
 
-        //Menyer 
+        //Build Program
+        builder.RegisterType<StartUp>().As<IStartUp>();
         builder.RegisterType<App>().As<IApp>();
+        builder.RegisterType<SeedData>().As<ISeedData>();
+
+        //Menyer 
         builder.RegisterType<MainMenu>().As<IMenu>();
         builder.RegisterType<BookingMenu>().As<IBookingMenu>();
         builder.RegisterType<CustomerMenu>().As<ICustomerMenu>();
