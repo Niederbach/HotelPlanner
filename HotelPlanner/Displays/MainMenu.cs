@@ -26,8 +26,8 @@ public class MainMenu : IMenu
         IRoomMenu room, 
         IInvoiceMenu invoiceMenu)
     {
-        _mainMenuOptions.Add("Hantera Kunder");
-        _mainMenuOptions.Add("Hantera Bokningar");
+        _mainMenuOptions.Add("Hantera kunder");
+        _mainMenuOptions.Add("Hantera bokningar");
         _mainMenuOptions.Add("Hantera rum");
         _mainMenuOptions.Add("Hantera fakturor");
         _booking = booking;
@@ -50,44 +50,30 @@ public class MainMenu : IMenu
 
             var keyInput = Console.ReadKey(true);
 
-            UserInput(keyInput);
-        }
-    }
-    public void UserInput(ConsoleKeyInfo keyInput)
-    {
-        if (keyInput.Key == ConsoleKey.DownArrow)
-        {
-            _selectedIndex++;
-            if (_selectedIndex > _mainMenuOptions.Count)
-                _selectedIndex = 0;
-        }
-        else if (keyInput.Key == ConsoleKey.UpArrow)
-        {
-            _selectedIndex--;
-            if (_selectedIndex < 0)
-                _selectedIndex = _mainMenuOptions.Count;
-        }
-        else if (keyInput.Key == ConsoleKey.Enter)
-        {
-            if (_selectedIndex == 0)
-            {
-                _customer.ShowCustomerMenu();
-            }
-            else if (_selectedIndex == 1)
-            {
-                _booking.ShowBookingMenu();
-            }
-            else if (_selectedIndex == 2)
-            {
-                _room.ShowRoomManagementMenu();
-            }
-            else if (_selectedIndex == 3)
-            {
-                _invoice.ShowInvoiceMenu();
-            }
-            else if (_selectedIndex == _mainMenuOptions.Count)
-                _running = false;
+            _selectedIndex = UserKeyInput.UserInput(_selectedIndex, keyInput, _mainMenuOptions);
 
+            if (keyInput.Key == ConsoleKey.Enter)
+            {
+                if (_selectedIndex == 0)
+                {
+                    _customer.ShowCustomerMenu();
+                }
+                else if (_selectedIndex == 1)
+                {
+                    _booking.ShowBookingMenu();
+                }
+                else if (_selectedIndex == 2)
+                {
+                    _room.ShowRoomManagementMenu();
+                }
+                else if (_selectedIndex == 3)
+                {
+                    _invoice.ShowInvoiceMenu();
+                }
+                else if (_selectedIndex == _mainMenuOptions.Count)
+                    _running = false;
+            }
         }
     }
+    
 }

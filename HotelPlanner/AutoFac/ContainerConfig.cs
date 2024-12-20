@@ -23,7 +23,7 @@ public static class ContainerConfig
         var builder = new ContainerBuilder();
 
         //Build Program
-        builder.RegisterType<StartUp>().As<IStartUp>();
+        builder.RegisterType<AppConfiguration>().As<IAppConfiguration>();
         builder.RegisterType<App>().As<IApp>();
         builder.RegisterType<SeedData>().As<ISeedData>();
 
@@ -58,10 +58,10 @@ public static class ContainerConfig
 
 
         //Services
-        builder.RegisterType<CustomerService>().As<IDataService>();
-        builder.RegisterType<BookingService>().As<IDataService>();
-        builder.RegisterType<RoomService>().As<IDataService>();
-        builder.RegisterType<InvoiceService>().As<IDataService>();
+        builder.RegisterType<CustomerService>().As<ICustomerService>();
+        builder.RegisterType<BookingService>().As<IBookingService>();
+        builder.RegisterType<RoomService>().As<IRoomService>();
+        builder.RegisterType<InvoiceService>().As<IInvoiceService>();
 
 
 

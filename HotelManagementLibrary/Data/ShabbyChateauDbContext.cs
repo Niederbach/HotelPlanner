@@ -1,10 +1,5 @@
 ﻿using HotelManagementLibrary.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelManagementLibrary.Data
 {
@@ -17,7 +12,7 @@ namespace HotelManagementLibrary.Data
 
         public ShabbyChateauDbContext()
         {
-            
+
         }
 
         public ShabbyChateauDbContext(DbContextOptions<ShabbyChateauDbContext> options)
@@ -29,7 +24,7 @@ namespace HotelManagementLibrary.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Server=.;Database=CodeFirstDemo;Trusted_Connection=True;TrustServerCertificate=true;");
+                optionsBuilder.UseSqlServer(@"Server=.;Database=TheShabbyChateau;Trusted_Connection=True;TrustServerCertificate=true;");
             }
         }
     }

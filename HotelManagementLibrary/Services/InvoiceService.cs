@@ -2,7 +2,15 @@
 
 namespace HotelManagementLibrary.Services
 {
-    public class InvoiceService : IDataService
+    public class InvoiceService : IInvoiceService
     {
+        public void GetAllInvoices()
+        {
+
+        }
+        public void GetOneInvoice()
+        {
+
+        }
     }
 }

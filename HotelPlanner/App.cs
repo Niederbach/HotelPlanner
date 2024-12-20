@@ -13,12 +13,12 @@ namespace ConsoleUI;
 public class App : IApp
 {
     IMenu _mainMenu;
-    IStartUp _startUp;
+    IAppConfiguration _startUp;
     ISeedData _seedData;
     
     public App(
         IMenu mainMenu, 
-        IStartUp startUp, 
+        IAppConfiguration startUp, 
         ISeedData seedData)
     {
         _mainMenu = mainMenu;
@@ -27,9 +27,11 @@ public class App : IApp
     }
     public void Run()
     {
-        _startUp.ConfigureServices();
-        _seedData.SeedCustomers();
-        //_seedData.SeedRooms();  
+        var options = _startUp.ConfigureOptionBuilder();
+
+        _startUp.ConfigureServices(options);
+        _seedData.SeedCustomers(options);
+        _seedData.SeedRooms(options);  
         _mainMenu.ShowMenu();
     }
 }

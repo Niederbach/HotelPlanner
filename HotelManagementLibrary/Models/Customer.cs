@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HotelManagementLibrary.Models
+﻿namespace HotelManagementLibrary.Models
 {
     public class Customer
     {
@@ -17,7 +11,7 @@ namespace HotelManagementLibrary.Models
         public string Phone { get; set; }
         public string PostalCode { get; set; }
         public string Email { get; set; }
-        public bool IsActive { get; set; }  
+        public bool IsActive { get; set; }
         public ICollection<Booking> Bookings { get; set; }
     }
 }

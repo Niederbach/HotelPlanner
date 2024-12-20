@@ -1,13 +1,15 @@
 ﻿using HotelManagementLibrary.Data.DataInterfaces;
 using HotelManagementLibrary.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace HotelManagementLibrary.Data
 {
     public class SeedData : ISeedData
     {
-        public void SeedCustomers()
+        public void SeedCustomers(DbContextOptionsBuilder<ShabbyChateauDbContext> options)
         {
-            using (var context = new ShabbyChateauDbContext())
+            using (var context = new ShabbyChateauDbContext(options.Options))
             {
                 if (!context.Customers.Any())
                 {
@@ -66,27 +68,39 @@ namespace HotelManagementLibrary.Data
 
             }
         }
-        public void SeedRooms()
+        public void SeedRooms(DbContextOptionsBuilder<ShabbyChateauDbContext> options)
         {
-            using (var context = new ShabbyChateauDbContext())
+            using (var context = new ShabbyChateauDbContext(options.Options))
             {
                 if (!context.Rooms.Any())
                 {
                     var room1 = new Room()
                     {
                         RoomNumber = 101,
+                        RoomType = RoomType.OneBedRoom,
+                        HasExtraBed = false,
+                        IsActive = true
                     };
                     var room2 = new Room()
                     {
                         RoomNumber = 102,
+                        RoomType= RoomType.TwoBedRoom,
+                        HasExtraBed = true,
+                        IsActive = true
                     };
                     var room3 = new Room()
                     {
-                        RoomNumber = 201
+                        RoomNumber = 201,
+                        RoomType = RoomType.OneBedRoom,
+                        HasExtraBed = false,
+                        IsActive = true
                     };
                     var room4 = new Room()
                     {
-                        RoomNumber = 202
+                        RoomNumber = 202,
+                        RoomType = RoomType.TwoBedRoom,
+                        HasExtraBed = true,
+                        IsActive = true
                     };
                     context.Rooms.AddRange(room1, room2, room3, room4);
 

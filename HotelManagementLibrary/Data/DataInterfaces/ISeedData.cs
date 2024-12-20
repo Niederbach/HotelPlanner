@@ -1,8 +1,11 @@
-﻿namespace HotelManagementLibrary.Data.DataInterfaces
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+
+namespace HotelManagementLibrary.Data.DataInterfaces
 {
     public interface ISeedData
     {
-        void SeedCustomers();
-        void SeedRooms();
+        void SeedCustomers(DbContextOptionsBuilder<ShabbyChateauDbContext> options);
+        void SeedRooms(DbContextOptionsBuilder<ShabbyChateauDbContext> options);
     }
 }
