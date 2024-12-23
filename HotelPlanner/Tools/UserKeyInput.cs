@@ -43,5 +43,22 @@ namespace ConsoleUI.Tools
 
             return selectedIndex;
         }
+        public static int RoomKeyInput(int selectedIndex, ConsoleKeyInfo keyInput, List<Room> room)
+        {
+            if (keyInput.Key == ConsoleKey.DownArrow)
+            {
+                selectedIndex++;
+                if (selectedIndex > room.Count)
+                    selectedIndex = 0;
+            }
+            else if (keyInput.Key == ConsoleKey.UpArrow)
+            {
+                selectedIndex--;
+                if (selectedIndex < 0)
+                    selectedIndex = room.Count;
+            }
+
+            return selectedIndex;
+        }
     }
 }

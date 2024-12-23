@@ -2,8 +2,8 @@
 {
     public enum RoomType
     {
-        OneBedRoom,
-        TwoBedRoom
+        enkelrum,
+        dubbelrum
     }
     public class Room
     {

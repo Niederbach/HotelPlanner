@@ -1,6 +1,7 @@
 ﻿using HotelManagementLibrary.Data.DataInterfaces;
 using HotelManagementLibrary.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Options;
 
 namespace HotelManagementLibrary.Data
@@ -77,28 +78,28 @@ namespace HotelManagementLibrary.Data
                     var room1 = new Room()
                     {
                         RoomNumber = 101,
-                        RoomType = RoomType.OneBedRoom,
+                        RoomType = RoomType.enkelrum,
                         HasExtraBed = false,
                         IsActive = true
                     };
                     var room2 = new Room()
                     {
                         RoomNumber = 102,
-                        RoomType= RoomType.TwoBedRoom,
+                        RoomType= RoomType.dubbelrum,
                         HasExtraBed = true,
                         IsActive = true
                     };
                     var room3 = new Room()
                     {
                         RoomNumber = 201,
-                        RoomType = RoomType.OneBedRoom,
+                        RoomType = RoomType.enkelrum,
                         HasExtraBed = false,
                         IsActive = true
                     };
                     var room4 = new Room()
                     {
                         RoomNumber = 202,
-                        RoomType = RoomType.TwoBedRoom,
+                        RoomType = RoomType.dubbelrum,
                         HasExtraBed = true,
                         IsActive = true
                     };

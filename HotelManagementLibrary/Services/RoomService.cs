@@ -1,32 +1,57 @@
-﻿using HotelManagementLibrary.Services.ServiceInterfaces;
+﻿using HotelManagementLibrary.Data;
+using HotelManagementLibrary.Models;
+using HotelManagementLibrary.Services.ServiceInterfaces;
+using Microsoft.EntityFrameworkCore;
 
-namespace HotelManagementLibrary.Services
+namespace HotelManagementLibrary.Services;
+
+public class RoomService : IRoomService
 {
-    public class RoomService : IRoomService
+    public void CreateRoom(DbContextOptionsBuilder<ShabbyChateauDbContext> options)
     {
-        public void CreateRoom()
-        {
 
+    }
+    public Room GetSingelRoom(DbContextOptionsBuilder<ShabbyChateauDbContext> options, int roomNumber)
+    {
+        using (var context  = new ShabbyChateauDbContext(options.Options))
+        {
+            return context.Rooms.First(x => x.RoomNumber == roomNumber);
         }
-        public void GetSingelRoom()
+    }
+    public List<Room> GetAllRooms(DbContextOptionsBuilder<ShabbyChateauDbContext> options)
+    {
+        using (var context = new ShabbyChateauDbContext(options.Options))
         {
-
+            return context.Rooms.Where(x => x.IsActive).ToList();
         }
-        public void GetAllRooms()
-        {
+    }
+    public void UpdateRoom(DbContextOptionsBuilder<ShabbyChateauDbContext> options)
+    {
 
+    }
+    public void DeleteRoom(DbContextOptionsBuilder<ShabbyChateauDbContext> options, int roomNumber)
+    {
+        using (var context = new ShabbyChateauDbContext(options.Options))
+        {
+            var room = context.Rooms.First(x => x.RoomNumber == roomNumber);
+            room.IsActive = false;
+            context.SaveChanges();
         }
-        public void UpdateRoom()
+    }
+    public void RecoverRoom(DbContextOptionsBuilder<ShabbyChateauDbContext> options, int roomNumber)
+    {
+        using (var context = new ShabbyChateauDbContext(options.Options))
         {
-
-        }
-        public void DeleteRoom()
+            var room = context.Rooms.First(x => x.RoomNumber == roomNumber);
+            room.IsActive = true;
+            context.SaveChanges();
+        } 
+    }
+    public List<Room> GetAllDeletedRooms(DbContextOptionsBuilder<ShabbyChateauDbContext> options)
+    {
+        using (var context = new ShabbyChateauDbContext(options.Options))
         {
-
-        }
-        public void RecoverRoom()
-        {
-
+            return context.Rooms.Where(x => x.IsActive == false).ToList();
         }
     }
 }

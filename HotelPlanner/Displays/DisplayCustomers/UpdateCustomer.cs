@@ -44,7 +44,7 @@ public class UpdateCustomer : IUpdateCustomer
             var options = _appConfiguration.ConfigureOptionBuilder();
             var customers = _customerService.GetAllCustomers(options);
 
-            FormatCustomers.CreateCustomerEmailUI(_selectedIndex, customers, index);
+            SelectFormat.CreateCustomerEmailUI(_selectedIndex, customers, index);
 
             Console.WriteLine("=======================");
 

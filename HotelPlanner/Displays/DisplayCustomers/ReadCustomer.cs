@@ -98,7 +98,7 @@ public class ReadCustomer : IReadCustomer
             var options = _appConfiguration.ConfigureOptionBuilder();
             var customers = _customerService.GetAllCustomers(options);
 
-            FormatCustomers.CreateCustomerEmailUI(selectedIndex, customers, index);
+            SelectFormat.CreateCustomerEmailUI(selectedIndex, customers, index);
 
             Console.WriteLine("================");
 

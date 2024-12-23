@@ -43,7 +43,7 @@ public class RecoverCustomer : IRecoverCustomer
             var options = _appConfiguration.ConfigureOptionBuilder();
             var customers = _customerService.GetAllDeletedCustomers(options);
             
-            FormatCustomers.CreateCustomerEmailUI(_selectedIndex, customers, index);
+            SelectFormat.CreateCustomerEmailUI(_selectedIndex, customers, index);
 
             Console.WriteLine("================");
 
