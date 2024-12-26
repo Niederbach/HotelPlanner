@@ -27,8 +27,8 @@ namespace ConsoleUI.Displays.DisplayRoomManagement
             IRecoverRoom recoverRoom)
         {
             _roomOptions.Add("Lägg till rum");
-            _roomOptions.Add("titta på rum");
-            _roomOptions.Add("ändra rum information");
+            _roomOptions.Add("Titta på rum");
+            _roomOptions.Add("Ändra rum information");
             _roomOptions.Add("Ta bort rum");
             _roomOptions.Add("Lägg till borttaget rum");
             _createRoom = createRoom;

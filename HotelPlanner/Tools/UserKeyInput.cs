@@ -1,4 +1,5 @@
 ﻿using HotelManagementLibrary.Models;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,23 @@ namespace ConsoleUI.Tools
                 selectedIndex--;
                 if (selectedIndex < 0)
                     selectedIndex = options.Count;
+            }
+
+            return selectedIndex;
+        }
+        public static int SimpelUserInput(int selectedIndex, ConsoleKeyInfo keyInput)
+        {
+            if (keyInput.Key == ConsoleKey.DownArrow)
+            {
+                selectedIndex++;
+                if (selectedIndex > 1)
+                    selectedIndex = 0;
+            }
+            else if (keyInput.Key == ConsoleKey.UpArrow)
+            {
+                selectedIndex--;
+                if (selectedIndex < 0)
+                    selectedIndex = 1;
             }
 
             return selectedIndex;

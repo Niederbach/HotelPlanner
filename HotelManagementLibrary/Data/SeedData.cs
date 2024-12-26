@@ -79,6 +79,8 @@ namespace HotelManagementLibrary.Data
                     {
                         RoomNumber = 101,
                         RoomType = RoomType.enkelrum,
+                        RoomPrice = 2000m,
+                        RoomSize = 20,
                         HasExtraBed = false,
                         IsActive = true
                     };
@@ -86,6 +88,8 @@ namespace HotelManagementLibrary.Data
                     {
                         RoomNumber = 102,
                         RoomType= RoomType.dubbelrum,
+                        RoomPrice = 3000m,
+                        RoomSize = 30,
                         HasExtraBed = true,
                         IsActive = true
                     };
@@ -93,6 +97,8 @@ namespace HotelManagementLibrary.Data
                     {
                         RoomNumber = 201,
                         RoomType = RoomType.enkelrum,
+                        RoomPrice = 2000m,
+                        RoomSize = 20,
                         HasExtraBed = false,
                         IsActive = true
                     };
@@ -100,6 +106,8 @@ namespace HotelManagementLibrary.Data
                     {
                         RoomNumber = 202,
                         RoomType = RoomType.dubbelrum,
+                        RoomPrice = 3000m,
+                        RoomSize = 30,
                         HasExtraBed = true,
                         IsActive = true
                     };

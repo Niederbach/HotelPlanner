@@ -118,8 +118,7 @@ public class UpdateCustomer : IUpdateCustomer
 
             if (input == 1)
             {
-                Console.WriteLine("Skriv in nytt förnamn");
-                Console.Write(">>> ");
+                Console.Write("Skriv in nytt förnamn: ");
                 var newFirstName = Console.ReadLine();
 
                 newFirstName = StringManipulator.CapitalizeFirstLetter(newFirstName);
@@ -162,8 +161,7 @@ public class UpdateCustomer : IUpdateCustomer
             }
             else if (input == 2)
             {
-                Console.WriteLine("Skriv in nytt efternamn");
-                Console.Write(">>> ");
+                Console.Write("Skriv in nytt efternamn: ");
                 var newLastName = Console.ReadLine();
 
                 newLastName = StringManipulator.CapitalizeFirstLetter(newLastName);
@@ -206,8 +204,7 @@ public class UpdateCustomer : IUpdateCustomer
             }
             else if (input == 3)
             {
-                Console.WriteLine("Skriv in ny email");
-                Console.Write(">>> ");
+                Console.Write("Skriv in ny email: ");
                 var newEmail = Console.ReadLine();
 
                 string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$";
@@ -244,8 +241,7 @@ public class UpdateCustomer : IUpdateCustomer
             }
             else if (input == 4)
             {
-                Console.WriteLine("Skriv in nytt telefonnummer");
-                Console.Write(">>> ");
+                Console.Write("Skriv in nytt telefonnummer: ");
                 var newPhoneNumber = Console.ReadLine();
 
                 if (int.TryParse(newPhoneNumber, out int resualt))
@@ -278,9 +274,19 @@ public class UpdateCustomer : IUpdateCustomer
             }
             else if (input == 5)
             {
-                Console.WriteLine("Skriv in ny adress");
-                Console.Write(">>> ");
+                Console.Write("Skriv in ny adress: ");
                 var newAddress = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(newAddress))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Ogiltig inmatning, får ej vara blankt");
+                    Console.ResetColor();
+                    Console.WriteLine("=======================");
+                    Console.WriteLine("Tryck valfri tangent för att fortsätta");
+                    Console.ReadKey();
+                    continue;
+                }
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Ändrar på adress...");
@@ -299,8 +305,7 @@ public class UpdateCustomer : IUpdateCustomer
             }
             else if (input == 6)
             {
-                Console.WriteLine("Skriv in ny stad");
-                Console.Write(">>> ");
+                Console.Write("Skriv in ny stad: ");
                 var newCity = Console.ReadLine();
 
                 newCity = StringManipulator.CapitalizeFirstLetter(newCity);
@@ -308,7 +313,7 @@ public class UpdateCustomer : IUpdateCustomer
                 if (string.IsNullOrEmpty(newCity))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Ogiltig inmatning");
+                    Console.WriteLine("Ogiltig inmatning, får ej vara blankt");
                     Console.ResetColor();
                     Console.WriteLine("=======================");
                     Console.WriteLine("Tryck valfri tangent för att fortsätta");
@@ -343,8 +348,7 @@ public class UpdateCustomer : IUpdateCustomer
             }
             else if (input == 7)
             {
-                Console.WriteLine("Skriv in nytt land");
-                Console.Write(">>> ");
+                Console.Write("Skriv in nytt land: ");
                 var newCountry = Console.ReadLine();
 
                 newCountry = StringManipulator.CapitalizeFirstLetter(newCountry);
@@ -352,7 +356,7 @@ public class UpdateCustomer : IUpdateCustomer
                 if (string.IsNullOrEmpty(newCountry))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Ogiltig inmatning");
+                    Console.WriteLine("Ogiltig inmatning, får ej vara blankt");
                     Console.ResetColor();
                     Console.WriteLine("=======================");
                     Console.WriteLine("Tryck valfri tangent för att fortsätta");
@@ -387,9 +391,19 @@ public class UpdateCustomer : IUpdateCustomer
             }
             else if (input == 8)
             {
-                Console.WriteLine("Skriv in nytt postnummer");
-                Console.Write(">>> ");
+                Console.Write("Skriv in nytt postnummer: ");
                 var newPostalCode = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(newPostalCode))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Ogiltig inmatning, får ej vara blankt");
+                    Console.ResetColor();
+                    Console.WriteLine("=======================");
+                    Console.WriteLine("Tryck valfri tangent för att fortsätta");
+                    Console.ReadKey();
+                    continue;
+                }
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Ändrar på postnummer...");

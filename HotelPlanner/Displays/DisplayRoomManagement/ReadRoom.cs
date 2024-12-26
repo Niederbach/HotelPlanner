@@ -86,6 +86,8 @@ public class ReadRoom : IReadRoom
 
                 Console.WriteLine($"{"ID".PadRight(11, ' ')} - {room.RoomId}");
                 Console.WriteLine($"{"Rumsnummer".PadRight(11, ' ')} - {room.RoomNumber}");
+                Console.WriteLine($"{"Rumspris".PadRight(11, ' ')} - {room.RoomPrice} kr/natt");
+                Console.WriteLine($"{"Rumstorlek".PadRight(11, ' ')} - {room.RoomSize} kvm");
                 Console.WriteLine($"{"Extra säng".PadRight(11, ' ')} - {room.HasExtraBed}");
                 Console.WriteLine($"{"Rums typ".PadRight(11, ' ')} - {room.RoomType}");
 
@@ -99,6 +101,7 @@ public class ReadRoom : IReadRoom
     }
     public void ShowReadAllRooms()
     {
+        Console.Clear();
         Console.WriteLine("Titta på alla rum");
         Console.WriteLine("=================");
 
@@ -110,6 +113,8 @@ public class ReadRoom : IReadRoom
         {
             Console.WriteLine($"{"ID".PadRight(11, ' ')} - {room.RoomId}");
             Console.WriteLine($"{"Rumsnummer".PadRight(11, ' ')} - {room.RoomNumber}");
+            Console.WriteLine($"{"Rumspris".PadRight(11, ' ')} - {room.RoomPrice} kr/natt");
+            Console.WriteLine($"{"Rumstorlek".PadRight(11, ' ')} - {room.RoomSize} kvm");
             Console.WriteLine($"{"Extra säng".PadRight(11, ' ')} - {room.HasExtraBed}");
             Console.WriteLine($"{"Rums typ".PadRight(11, ' ')} - {room.RoomType}");
 
