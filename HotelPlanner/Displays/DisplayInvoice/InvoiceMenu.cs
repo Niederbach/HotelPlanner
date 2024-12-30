@@ -21,6 +21,21 @@ namespace ConsoleUI.Displays.DisplayInvoice
         }
         public void ShowInvoiceMenu()
         {
+            Console.Clear();
+            Console.WriteLine("Faktura Hantering");
+            Console.WriteLine("=================");
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("OBS!");
+            Console.WriteLine("Under utveckling, går ej att titta på fakturor just nu");
+            Console.ResetColor();
+
+            Console.WriteLine("=================");
+
+            Console.ReadKey();
+
+            return;
+
             _selectedIndex = 0;
             _running = true;
             while (_running)

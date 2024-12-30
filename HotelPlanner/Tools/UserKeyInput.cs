@@ -27,19 +27,19 @@ namespace ConsoleUI.Tools
 
             return selectedIndex;
         }
-        public static int SimpelUserInput(int selectedIndex, ConsoleKeyInfo keyInput)
+        public static int VisistorUserInput(int selectedIndex, ConsoleKeyInfo keyInput, int highIndex, int lowIndex)
         {
             if (keyInput.Key == ConsoleKey.DownArrow)
             {
-                selectedIndex++;
-                if (selectedIndex > 1)
-                    selectedIndex = 0;
+                selectedIndex--;
+                if (selectedIndex < lowIndex)
+                    selectedIndex = lowIndex;
             }
             else if (keyInput.Key == ConsoleKey.UpArrow)
             {
-                selectedIndex--;
-                if (selectedIndex < 0)
-                    selectedIndex = 1;
+                selectedIndex++;
+                if (selectedIndex > highIndex)
+                    selectedIndex = highIndex;
             }
 
             return selectedIndex;
@@ -74,6 +74,23 @@ namespace ConsoleUI.Tools
                 selectedIndex--;
                 if (selectedIndex < 0)
                     selectedIndex = room.Count;
+            }
+
+            return selectedIndex;
+        }
+        public static int BookingKeyInput(int selectedIndex, ConsoleKeyInfo keyInput, List<Booking> booking)
+        {
+            if (keyInput.Key == ConsoleKey.DownArrow)
+            {
+                selectedIndex++;
+                if (selectedIndex > booking.Count)
+                    selectedIndex = 0;
+            }
+            else if (keyInput.Key == ConsoleKey.UpArrow)
+            {
+                selectedIndex--;
+                if (selectedIndex < 0)
+                    selectedIndex = booking.Count;
             }
 
             return selectedIndex;

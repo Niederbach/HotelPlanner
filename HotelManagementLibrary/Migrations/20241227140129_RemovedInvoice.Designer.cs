@@ -4,6 +4,7 @@ using HotelManagementLibrary.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelManagementLibrary.Migrations
 {
     [DbContext(typeof(ShabbyChateauDbContext))]
-    partial class ShabbyChateauDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241227140129_RemovedInvoice")]
+    partial class RemovedInvoice
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,9 +50,6 @@ namespace HotelManagementLibrary.Migrations
 
                     b.Property<int>("customerId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("extraBed")
-                        .HasColumnType("bit");
 
                     b.HasKey("BookingId");
 

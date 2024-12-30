@@ -13,10 +13,10 @@ namespace HotelManagementLibrary.Models
         public DateTime ArrivalDate { get; set; }
         public DateTime DepartureDate { get; set; }
         public decimal Price { get; set; }
+        public bool extraBed {  get; set; }
         public int customerId { get; set; }
         public Customer customer { get; set; }
-        public int InvoiceId { get; set; }
-        public Invoice Invoice { get; set; }
-        public ICollection<Room> Room { get; set; }
+        public int RoomId { get; set; }
+        public Room Room { get; set; }
     }
 }

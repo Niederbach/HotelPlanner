@@ -1,159 +1,357 @@
 ﻿using ConsoleUI.Displays.DisplayBooking.BookingInterfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+using ConsoleUI.RootInterfaces;
+using ConsoleUI.Tools;
+using HotelManagementLibrary.Data;
+using HotelManagementLibrary.Models;
+using HotelManagementLibrary.Services.ServiceInterfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace ConsoleUI.Displays.DisplayBooking
 {
     public class CreateBooking : ICreateBooking
     {
-        public bool _running;
-        private byte _numberOfVisitors = 1;
-        private byte _numberofNights = 1;
-        private string _extraBed = "No";
+        IAppConfiguration _appConfiguration;
+        ICustomerService _customerService;
+        IBookingService _bookingService;
+        IRoomService _roomService;
+
+        private bool _running;
+        public CreateBooking(
+            IAppConfiguration appConfiguration,
+            ICustomerService customerService,
+            IBookingService bookingService,
+            IRoomService roomService)
+        {
+            _appConfiguration = appConfiguration;
+            _customerService = customerService;
+            _bookingService = bookingService;
+            _roomService = roomService;
+        }
         public void ShowCreateBooking()
         {
-            _running = true;
-            while(_running)
-            {
-                Console.Clear();
-                Console.WriteLine("Skapa ny bokning");
-                Console.WriteLine("================");
-
-                //här ska man välja kunden
-
-                _running = false; 
-            }
-
+            var options = _appConfiguration.ConfigureOptionBuilder();
 
             _running = true;
             while (_running)
             {
-                Console.Clear();
-                Console.WriteLine("Skapa ny bokning");
-                Console.WriteLine("================");
+                var customers = _customerService.GetAllCustomers(options);
+                var customer = ChooseCustomer(options, customers);
 
-                Console.BackgroundColor = ConsoleColor.Green;
-                Console.ForegroundColor = ConsoleColor.Black;
-                Console.Write($"- Antal besökare: {_numberOfVisitors}");
-                Console.ResetColor();
+                if (_running == false)
+                {
+                    return;
+                }
 
-                var keyInput = Console.ReadKey(true);
-                SelectVistorAmount(keyInput);
+                var rooms = _roomService.GetAllRooms(options);
+                var room = ChooseRoom(options, rooms);
+
+                if (_running == false)
+                {
+                    return;
+                }
+
+                var extraBed = false;
+                if (room.RoomSize > 20)
+                {
+                    extraBed = ChooseExtraBed();
+                }
+
+                var numVisitors = ChooseNumVisitors(room);
+
+                var arrvialDate = ChooseArrivalDate();
+
+                var numDays = ChooseNumberOfDays();
+
+                var depatureDate = arrvialDate.AddDays(numDays);
+
+                var price = room.RoomPrice * numDays;
+
+                Console.WriteLine("Är informationen korrekt? (Y/N)");
+                Console.WriteLine("=============================");
+                Console.WriteLine($"{"Kund".PadRight(12, ' ')} - {customer.Email}");
+                Console.WriteLine($"{"Antal gäster".PadRight(12, ' ')} - {numVisitors}");
+                Console.WriteLine($"{"Rum".PadRight(12, ' ')} - {room.RoomNumber}, {room.RoomType}");
+                Console.WriteLine($"{"Nätter".PadRight(12, ' ')} - {numDays}");
+                Console.WriteLine($"{"Extrasäng".PadRight(12, ' ')} - {extraBed}");
+                Console.WriteLine($"{"Ankomst".PadRight(12, ' ')} - {arrvialDate}");
+                Console.WriteLine($"{"Utcheckning".PadRight(12, ' ')} - {depatureDate}");
+                Console.WriteLine($"{"Pris".PadRight(12, ' ')} - {price} kr");
+                Console.WriteLine("=============================");
+                Console.Write(">>> ");
+                var userInput = Console.ReadLine().ToUpper();
+
+
+                if (userInput == "Y")
+                {
+                    Console.WriteLine("=======================");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Skapar ny bokning...");
+                    Console.ResetColor();
+
+                    _bookingService.CreateBooking(
+                                        options,
+                                        customer,
+                                        room,
+                                        numDays,
+                                        extraBed,
+                                        numVisitors,
+                                        arrvialDate,
+                                        depatureDate,
+                                        price);
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Ny bokning skapad");
+                    Console.ResetColor();
+                    Console.WriteLine("=======================");
+                    Console.WriteLine("Tryck valfri tangent för att fortsätta");
+                    Console.ReadKey();
+
+                    return;
+                }
+                else if (userInput == "N")
+                {
+                    return;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Ogilig inmating, avbryter hadling");
+                    Console.ResetColor();
+                    Console.WriteLine("=======================");
+                    Console.WriteLine("Tryck valfri tangent för att fortsätta");
+                    Console.ReadKey();
+                    return;
+                }
+
+
+
             }
-
-            _running = true;
-            while (_running)
-            {
-                Console.Clear();
-                Console.WriteLine("Skapa ny bokning");
-                Console.WriteLine("================");
-
-                Console.WriteLine($"- Antal besökare: {_numberOfVisitors}");
-
-                Console.BackgroundColor = ConsoleColor.Green;
-                Console.ForegroundColor = ConsoleColor.Black;
-                Console.WriteLine($"- Antal Nätter: {_numberofNights}");
-                Console.ResetColor();
-
-                var keyInput = Console.ReadKey(true);
-                SelectNumberOfNights(keyInput);
-            }
-
-            _running = true;
-            while (_running)
-            {
-                Console.Clear();
-                Console.WriteLine("Skapa ny bokning");
-                Console.WriteLine("================");
-
-                //här ska man välja datum
-
-                _running = false;
-            }
-
-            _running = true;
-            while (_running)
-            {
-                Console.Clear();
-                Console.WriteLine("Skapa ny bokning");
-                Console.WriteLine("================");
-
-                Console.WriteLine($"- Antal besökare: {_numberOfVisitors}");
-                Console.WriteLine($"- Antal Nätter: {_numberofNights}");
-
-                Console.BackgroundColor= ConsoleColor.Green;
-                Console.ForegroundColor = ConsoleColor.Black;
-                Console.WriteLine($"- Extra säng: {_extraBed}");
-                Console.ResetColor();
-
-                var keyInput = Console.ReadKey(true);
-                SelectExtraBed(keyInput);
-            }
-
         }
-        public byte SelectVistorAmount(ConsoleKeyInfo keyInput)
+        public Customer ChooseCustomer(
+            DbContextOptionsBuilder<ShabbyChateauDbContext> options,
+            List<Customer> customers)
+        {
+
+            int selectedIndex = 0;
+            int index = 0;
+
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine($"Välj kund");
+                Console.WriteLine("==========");
+
+                SelectFormat.CreateCustomerEmailUI(selectedIndex, customers, index);
+
+                Console.WriteLine("==========");
+
+                var keyInput = Console.ReadKey(true);
+
+                selectedIndex = UserKeyInput.CustomerKeyInput(selectedIndex, keyInput, customers);
+
+                if (keyInput.Key == ConsoleKey.Enter)
+                {
+                    if (selectedIndex == customers.Count)
+                    {
+                        _running = false;
+                        return null;
+                    }
+
+                    return customers[selectedIndex];
+                }
+            }
+        }
+        public Room ChooseRoom(
+            DbContextOptionsBuilder<ShabbyChateauDbContext> options,
+            List<Room> rooms)
+        {
+
+            int selectedIndex = 0;
+            int index = 0;
+
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine($"Välj rum");
+                Console.WriteLine("=====================");
+
+                SelectFormat.CreateRoomNumberWithRoomTypeUI(selectedIndex, rooms, index);
+
+                Console.WriteLine("=====================");
+
+                var keyInput = Console.ReadKey(true);
+
+                selectedIndex = UserKeyInput.RoomKeyInput(selectedIndex, keyInput, rooms);
+
+                if (keyInput.Key == ConsoleKey.Enter)
+                {
+                    if (selectedIndex == rooms.Count)
+                    {
+                        _running = false;
+                        return null;
+                    }
+
+                    return rooms[selectedIndex];
+                }
+            }
+        }
+        public int ChooseNumVisitors(Room room)
+        {
+
+            int selectedInput = 1;
+            int highIndex = 0;
+            int lowIndex = 0;
+            if (room.RoomType == RoomType.enkelrum)
+            {
+                highIndex = 2;
+                lowIndex = 1;
+            }
+            else if (room.RoomType == RoomType.dubbelrum)
+            {
+                highIndex = 3;
+                lowIndex = 1;
+            }
+
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("Välj antal besökare");
+                Console.WriteLine("===================");
+                Console.WriteLine($"Antal - {selectedInput}");
+                Console.WriteLine("===================");
+
+                var keyInput = Console.ReadKey();
+
+                selectedInput = UserKeyInput.VisistorUserInput(selectedInput, keyInput, highIndex, lowIndex);
+
+                Console.SetCursorPosition(0, 2);
+                Console.Write("                 ");
+                Console.SetCursorPosition(0, 2);
+
+
+                if (keyInput.Key == ConsoleKey.Enter)
+                {
+                    return selectedInput;
+                }
+
+            }
+        }
+        public DateTime ChooseArrivalDate()
         {
             while (true)
             {
-                if (keyInput.Key == ConsoleKey.UpArrow)
-                {
-                    _numberOfVisitors++;
-                    if (_numberOfVisitors > 5)
-                        _numberOfVisitors = 5;
-                }
-                else if (keyInput.Key == ConsoleKey.DownArrow)
-                {
-                    _numberOfVisitors--;
-                    if (_numberOfVisitors < 1)
-                        _numberOfVisitors = 1;
-                }
-                else if (keyInput.Key == ConsoleKey.Enter)
-                    _running = false;
+                Console.Clear();
+                Console.WriteLine("Välj ankomstdatum");
+                Console.WriteLine("=================");
+                Console.Write(">>> ");
+                var arrivaldate = Console.ReadLine();
 
-                return _numberOfVisitors;
+
+
+                if (DateTime.TryParse(arrivaldate, out DateTime arrivalDateTime))
+                {
+                    if (arrivalDateTime < DateTime.Now)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Ogiltig datum");
+                        Console.ResetColor();
+                        Console.WriteLine("=======================");
+                        Console.WriteLine("Tryck valfri tangent för att fortsätta");
+                        Console.ReadKey();
+                        continue;
+                    }
+                    arrivalDateTime = arrivalDateTime.Date.AddHours(10);
+                    return arrivalDateTime;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Ogiltig inmatning, använd rätt format (xxxx-xx-xx)");
+                    Console.ResetColor();
+                    Console.WriteLine("=======================");
+                    Console.WriteLine("Tryck valfri tangent för att fortsätta");
+                    Console.ReadKey();
+                    continue;
+                }
             }
         }
-        public byte SelectNumberOfNights(ConsoleKeyInfo keyInput)
+        public int ChooseNumberOfDays()
         {
-
+            int selectedInput = 1;
+            int highIndex = 7;
+            int lowIndex = 1;
             while (true)
             {
-                if (keyInput.Key == ConsoleKey.UpArrow)
-                {
-                    _numberofNights++;
-                    if (_numberofNights > 14)
-                        _numberofNights = 14;
-                }
-                else if (keyInput.Key == ConsoleKey.DownArrow)
-                {
-                    _numberofNights--;
-                    if (_numberofNights < 1)
-                        _numberofNights = 1;
-                }
-                else if (keyInput.Key == ConsoleKey.Enter)
-                    _running = false;
+                Console.Clear();
+                Console.WriteLine("Välj antal nätter");
+                Console.WriteLine("===================");
+                Console.WriteLine($"nätter - {selectedInput}");
+                Console.WriteLine("===================");
 
-                return _numberofNights;
+                var keyInput = Console.ReadKey();
+
+                selectedInput = UserKeyInput.VisistorUserInput(selectedInput, keyInput, highIndex, lowIndex);
+
+                Console.SetCursorPosition(0, 2);
+                Console.Write("                 ");
+                Console.SetCursorPosition(0, 2);
+
+
+                if (keyInput.Key == ConsoleKey.Enter)
+                {
+                    return selectedInput;
+                }
             }
         }
-        public string SelectExtraBed(ConsoleKeyInfo keyInput)
+        public bool ChooseExtraBed()
         {
+            int selectedInput = 0;
+            int highIndex = 0;
+            int lowIndex = 1;
             while (true)
             {
-                if (keyInput.Key == ConsoleKey.UpArrow)
-                    _extraBed = "Yes";
+                Console.Clear();
+                Console.WriteLine("Behövs extrasäng?");
+                Console.WriteLine("=================");
 
-                else if (keyInput.Key == ConsoleKey.DownArrow)
-                    _extraBed = "No";
-                else if (keyInput.Key == ConsoleKey.Enter)
-                    _running = false;
+                if (selectedInput == 0)
+                {
+                    Console.Write("Svar - ");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("JA");
+                    Console.ResetColor();
 
-                return _extraBed;
+                    Console.WriteLine("NEJ".PadLeft(10, ' '));
+
+                }
+                if (selectedInput == 1)
+                {
+                    Console.Write("Svar - ");
+
+                    Console.WriteLine("JA");
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("NEJ".PadLeft(10, ' '));
+                    Console.ResetColor();
+                }
+
+                var keyInput = Console.ReadKey();
+
+                selectedInput = UserKeyInput.VisistorUserInput(selectedInput, keyInput, highIndex, lowIndex);
+
+                Console.SetCursorPosition(0, 2);
+                Console.Write("                 ");
+                Console.SetCursorPosition(0, 2);
+
+                if (keyInput.Key == ConsoleKey.Enter)
+                {
+                    if (selectedInput == 0)
+                    {
+                        return true;
+                    }
+                    else
+                        return false;
+                }
             }
         }
     }

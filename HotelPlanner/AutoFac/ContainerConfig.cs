@@ -37,7 +37,7 @@ public static class ContainerConfig
         //Display Booking
         builder.RegisterType<CreateBooking>().As<ICreateBooking>();
         builder.RegisterType<ReadBooking>().As<IReadBooking>();
-        builder.RegisterType<UpdateBooking>().As<IUpdateBooking>();
+        //builder.RegisterType<UpdateBooking>().As<IUpdateBooking>();
         builder.RegisterType<DeleteBooking>().As<IDeleteBooking>();
 
         //Display Customer

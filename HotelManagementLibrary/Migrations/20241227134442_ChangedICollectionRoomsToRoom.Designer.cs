@@ -4,6 +4,7 @@ using HotelManagementLibrary.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelManagementLibrary.Migrations
 {
     [DbContext(typeof(ShabbyChateauDbContext))]
-    partial class ShabbyChateauDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241227134442_ChangedICollectionRoomsToRoom")]
+    partial class ChangedICollectionRoomsToRoom
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,6 +39,9 @@ namespace HotelManagementLibrary.Migrations
                     b.Property<DateTime>("DepartureDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("InvoiceId")
+                        .HasColumnType("int");
+
                     b.Property<int>("NumVisitors")
                         .HasColumnType("int");
 
@@ -48,10 +54,9 @@ namespace HotelManagementLibrary.Migrations
                     b.Property<int>("customerId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("extraBed")
-                        .HasColumnType("bit");
-
                     b.HasKey("BookingId");
+
+                    b.HasIndex("InvoiceId");
 
                     b.HasIndex("RoomId");
 
@@ -160,6 +165,12 @@ namespace HotelManagementLibrary.Migrations
 
             modelBuilder.Entity("HotelManagementLibrary.Models.Booking", b =>
                 {
+                    b.HasOne("HotelManagementLibrary.Models.Invoice", "Invoice")
+                        .WithMany()
+                        .HasForeignKey("InvoiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("HotelManagementLibrary.Models.Room", "Room")
                         .WithMany()
                         .HasForeignKey("RoomId")
@@ -171,6 +182,8 @@ namespace HotelManagementLibrary.Migrations
                         .HasForeignKey("customerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Invoice");
 
                     b.Navigation("Room");
 

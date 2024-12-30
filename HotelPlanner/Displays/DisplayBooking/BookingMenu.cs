@@ -7,24 +7,21 @@ public class BookingMenu : IBookingMenu
 {
     ICreateBooking _createBooking;
     IReadBooking _readBooking;
-    IUpdateBooking _updateBooking;
     IDeleteBooking _deleteBooking;
+
     private bool _running;
     private int _selectedIndex = 0;
     private List<string> _bookingOptions = new List<string>();
     public BookingMenu(
         ICreateBooking createBooking, 
         IReadBooking readBooking, 
-        IUpdateBooking updateBooking, 
         IDeleteBooking deleteBooking)
     {
         _bookingOptions.Add("Lägg till boking");
         _bookingOptions.Add("Titta på bokingar");
-        _bookingOptions.Add("Ändra på bokning");
         _bookingOptions.Add("Ta bort bokning");
         _createBooking = createBooking;
         _readBooking = readBooking;
-        _updateBooking = updateBooking;
         _deleteBooking = deleteBooking;
     }
 
@@ -72,10 +69,6 @@ public class BookingMenu : IBookingMenu
                 _readBooking.ShowReadBooking();
             }
             else if (_selectedIndex == 2)
-            {
-                _updateBooking.ShowUpdateBooking();
-            }
-            else if (_selectedIndex == 3)
             {
                 _deleteBooking.ShowDeleteBooking();
             }
