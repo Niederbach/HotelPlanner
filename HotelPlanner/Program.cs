@@ -13,7 +13,7 @@ namespace ConsoleUI
             using (var scope = container.BeginLifetimeScope())
             {
                 var app = scope.Resolve<IApp>();
-                app.Run();
+                app.Run(); 
             }
         }
     }
