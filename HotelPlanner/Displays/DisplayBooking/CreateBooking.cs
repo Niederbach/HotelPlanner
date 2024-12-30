@@ -115,7 +115,7 @@ namespace ConsoleUI.Displays.DisplayBooking
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Ogilig inmating, avbryter hadling");
+                    Console.WriteLine("Ogilig inmating, avbryter handling");
                     Console.ResetColor();
                     Console.WriteLine("=======================");
                     Console.WriteLine("Tryck valfri tangent för att fortsätta");
@@ -285,7 +285,7 @@ namespace ConsoleUI.Displays.DisplayBooking
                 Console.Clear();
                 Console.WriteLine("Välj antal nätter");
                 Console.WriteLine("===================");
-                Console.WriteLine($"nätter - {selectedInput}");
+                Console.WriteLine($"Nätter - {selectedInput}");
                 Console.WriteLine("===================");
 
                 var keyInput = Console.ReadKey();

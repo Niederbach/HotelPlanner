@@ -228,6 +228,17 @@ namespace ConsoleUI.Displays.DisplayRoomManagement
                 Console.Write("Skriv in nytt rumstorlek: ");
                 var newRoomSize = Console.ReadLine();
 
+                if (int.Parse(newRoomSize) < 10)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Ogiltig inmatning, Rummen är inte mindre en 10 kvm");
+                    Console.ResetColor();
+                    Console.WriteLine("=======================");
+                    Console.WriteLine("Tryck valfri tangent för att fortsätta");
+                    Console.ReadKey();
+                    continue;
+                }
+
                 if (double.TryParse(newRoomSize, out double input))
                 {
                 }
@@ -242,7 +253,7 @@ namespace ConsoleUI.Displays.DisplayRoomManagement
                     continue;
                 }
 
-                Console.WriteLine("det här kan ändra den här informationen - extrasäng");
+                Console.WriteLine("det här kan ändra informationen - extrasäng");
                 Console.WriteLine("Vill du göra ändringen? (Y/N): ");
                 var choiceInput = Console.ReadLine().ToUpper();
 

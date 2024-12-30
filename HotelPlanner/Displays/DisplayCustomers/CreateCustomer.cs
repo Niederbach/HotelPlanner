@@ -57,6 +57,7 @@ namespace ConsoleUI.Displays.DisplayCustomers
 
                 Console.WriteLine("=============");
                 Console.WriteLine("Tryck valfri tangent för att fortsätta");
+                Console.ReadKey();
 
                 _running = false;
             }
