@@ -21,8 +21,8 @@ namespace HotelManagementLibrary.Data
                         Address = "12 Västerlånggatan",
                         City = "Stockholm",
                         Country = "Sverige",
-                        Phone = "070 123 45 67",
-                        PostalCode = "111 29",
+                        Phone = "0701234567",
+                        PostalCode = "11129",
                         Email = "Stefan.Björk@example.com",
                         IsActive = true,
                     };
@@ -33,8 +33,8 @@ namespace HotelManagementLibrary.Data
                         Address = "8 Storgatan",
                         City = "Göteborg",
                         Country = "Sverige",
-                        Phone = "070 234 56 78",
-                        PostalCode = "411 27",
+                        Phone = "0702345678",
+                        PostalCode = "41127",
                         Email = "Lisa.Andersson@example.com",
                         IsActive = true,
                     };
@@ -45,8 +45,8 @@ namespace HotelManagementLibrary.Data
                         Address = "35 Drottninggatan",
                         City = "Malmö",
                         Country = "Sverige",
-                        Phone = "070 345 67 89",
-                        PostalCode = "211 22",
+                        Phone = "0703456789",
+                        PostalCode = "21122",
                         Email = "Peter.Sjö@example.com",
                         IsActive = true,
                     };
@@ -57,8 +57,8 @@ namespace HotelManagementLibrary.Data
                         Address = "77 Östra Järnvägsgatan",
                         City = "Uppsala",
                         Country = "Sverige",
-                        Phone = "076 987 65 43",
-                        PostalCode = "753 35",
+                        Phone = "0769876543",
+                        PostalCode = "75335",
                         Email = "Philip.Philipsson@example.com",
                         IsActive = true,
                     };
